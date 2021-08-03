@@ -1,0 +1,22 @@
+{
+  "name": "huy-marzipano-test",
+  "version": "1.0.0",
+  "description": "test marzipano",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zshin1996/test-marzipano.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zshin1996/test-marzipano/issues"
+  },
+  "homepage": "https://github.com/zshin1996/test-marzipano#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
