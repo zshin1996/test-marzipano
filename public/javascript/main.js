@@ -18,68 +18,50 @@ window.onload = function () {
 
     let sources = [
         'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-1.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-2.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-3.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-4.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-5.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-6.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-7.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-8.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-9.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-10.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-11.jpeg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-12.jpeg'
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-2.jpeg',
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-3.jpeg',
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-4.jpeg',
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-5.jpeg',
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-6.jpeg',
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-7.jpeg',
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-8.jpeg',
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-9.jpeg',
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-10.jpeg',
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-11.jpeg',
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-12.jpeg'
     ];
-    let levels = [{ size: 8192 / 4 }, { size: 4096 / 2 }];
+    let levels = [{ size: 4096 / 4 }, { size: 2048 / 2 }];
     let geometry = new Marzipano.EquirectGeometry(levels);
     let view = new Marzipano.RectilinearView(
         { yaw: 0, pitch: 0, roll: 0, fov: Math.PI / 2 },
         limiter,
     );
     var scenes = [];
-    // sources.forEach(source => {
+    sources.forEach(source => {
         let scene = viewer.createScene({
-            source: sources[0],
+            source: Marzipano.ImageUrlSource.fromString(source),
             geometry: geometry,
             view: view,
             pinFirstLevel: true,
         });
         scenes.push(scene);
-    // });
+    });
 
-    // Scene 1
-    // let levels = [{ size: 8192/4 }, { size: 4096/2 }];
-    // let geometry = new Marzipano.EquirectGeometry(levels);
-    // let source = Marzipano.ImageUrlSource.fromString(
-    //   'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/lilienstein.jpg',
-    // );
-    // let view = new Marzipano.RectilinearView(
-    //   { yaw: 0, pitch: 0, roll: 0, fov: Math.PI / 2 },
-    //   limiter,
-    // );
-    // let scene = viewer.createScene({
-    //   source: source,
-    //   geometry: geometry,
-    //   view: view,
-    //   pinFirstLevel: true,
-    // });
-
-    // // Scene 2
-    // let levels1 = [{ size: 8192/4 }, { size: 4096/2 }];
-    // let geometry1 = new Marzipano.EquirectGeometry(levels1);
-    // let source1 = Marzipano.ImageUrlSource.fromString(
-    //   'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/comfy_cafe.jpg',
-    // );
-    // let view1 = new Marzipano.RectilinearView(
-    //   { yaw: 0, pitch: 0, roll: 0, fov: Math.PI / 2 },
-    //   limiter,
-    // );
-    // let scene1 = viewer.createScene({
-    //   source: source1,
-    //   geometry: geometry1,
-    //   view: view1,
-    //   pinFirstLevel: true,
-    // });
+    let currentIndex = 0;
+    let leftArrow = document.getElementById('buttonArrowLeft');
+    let rightArrow = document.getElementById('buttonArrowRight');
+    leftArrow.addEventListener('click', function () {
+        if (currentIndex > 0) {
+            currentIndex--;
+            scenes[currentIndex].switchTo();
+        }
+    });
+    rightArrow.addEventListener('click', function () {
+        if (currentIndex < scenes.length - 1) {
+            currentIndex++;
+            scenes[currentIndex].switchTo();
+        }
+    });
 
     // // Create swtich hotspot
     // let imgHotspot = document.createElement('img');
@@ -94,5 +76,24 @@ window.onload = function () {
     // scene.hotspotContainer().createHotspot(imgHotspot, position);
 
     // Show first scene by default
-    scene.switchTo();
+    scenes[currentIndex].switchTo();
 };
+
+function sidebar_open() {
+    // open sidebar.
+    var sidebar = document.getElementById("mySidebar");
+    sidebar.style.display = 'block';
+
+    // hide arrow.
+    this.style.display = 'none';
+}
+
+function sidebar_close() {
+    // open sidebar.
+    var sidebar = document.getElementById("mySidebar");
+    sidebar.style.display = 'none';
+
+    // hide arrow.
+    var navIcon = document.getElementById("sidebarNavIcon");
+    navIcon.child
+}
