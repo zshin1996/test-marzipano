@@ -17,10 +17,10 @@ window.onload = function() {
     );
   
     // Scene 1
-    let levels = [{ size: 4625/4 }, { size: 774/2 }];
+    let levels = [{ size: 8192/4 }, { size: 4096/2 }];
     let geometry = new Marzipano.EquirectGeometry(levels);
     let source = Marzipano.ImageUrlSource.fromString(
-      'https://upload.wikimedia.org/wikipedia/commons/0/0f/Clapham_Common_360_Panorama_-_July_2007.jpg',
+      'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/lilienstein.jpg',
     );
     let view = new Marzipano.RectilinearView(
       { yaw: 0, pitch: 0, roll: 0, fov: Math.PI / 2 },
