@@ -34,10 +34,10 @@ window.onload = function() {
     });
   
     // Scene 2
-    let levels1 = [{ size: 1500 }, { size: 1500 }];
+    let levels1 = [{ size: 8192/4 }, { size: 4096/2 }];
     let geometry1 = new Marzipano.EquirectGeometry(levels1);
     let source1 = Marzipano.ImageUrlSource.fromString(
-      'https://raw.githubusercontent.com/mistic100/Photo-Sphere-Viewer/dev/example/Bryce-Canyon-By-Jess-Beauchemin.jpg',
+      'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/comfy_cafe.jpg',
     );
     let view1 = new Marzipano.RectilinearView(
       { yaw: 0, pitch: 0, roll: 0, fov: Math.PI / 2 },
