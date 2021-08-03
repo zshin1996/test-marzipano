@@ -17,18 +17,18 @@ window.onload = function () {
     );
 
     let sources = [
-        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-1.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-2.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-3.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-4.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-5.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-6.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-7.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-8.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-9.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-10.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-11.jpg',
-        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-12.jpg'
+        'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-1.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-2.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-3.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-4.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-5.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-6.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-7.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-8.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-9.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-10.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-11.jpeg',
+        // 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/Spot-12.jpeg'
     ];
     let levels = [{ size: 8192 / 4 }, { size: 4096 / 2 }];
     let geometry = new Marzipano.EquirectGeometry(levels);
@@ -37,16 +37,15 @@ window.onload = function () {
         limiter,
     );
     var scenes = [];
-    sources.forEach(source => {
-        console.log(source);
+    // sources.forEach(source => {
         let scene = viewer.createScene({
-            source: source,
+            source: sources[0],
             geometry: geometry,
             view: view,
             pinFirstLevel: true,
         });
         scenes.push(scene);
-    });
+    // });
 
     // Scene 1
     // let levels = [{ size: 8192/4 }, { size: 4096/2 }];
