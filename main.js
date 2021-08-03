@@ -2,7 +2,6 @@ window.onload = function() {
     // Set up viewer
     const Marzipano = window.Marzipano;
     let panoElement = document.getElementById('pano');
-    
     let options = {
       controls: {
         mouseViewMode: 'drag',
@@ -18,10 +17,10 @@ window.onload = function() {
     );
   
     // Scene 1
-    let levels = [{ size: 1024 }, { size: 1024 }];
+    let levels = [{ size: 4625/4 }, { size: 774/2 }];
     let geometry = new Marzipano.EquirectGeometry(levels);
     let source = Marzipano.ImageUrlSource.fromString(
-       './4327640.jpg'
+      'https://upload.wikimedia.org/wikipedia/commons/0/0f/Clapham_Common_360_Panorama_-_July_2007.jpg',
     );
     let view = new Marzipano.RectilinearView(
       { yaw: 0, pitch: 0, roll: 0, fov: Math.PI / 2 },
@@ -38,7 +37,7 @@ window.onload = function() {
     let levels1 = [{ size: 1500 }, { size: 1500 }];
     let geometry1 = new Marzipano.EquirectGeometry(levels1);
     let source1 = Marzipano.ImageUrlSource.fromString(
-        './3490319.jpg'
+      'https://raw.githubusercontent.com/mistic100/Photo-Sphere-Viewer/dev/example/Bryce-Canyon-By-Jess-Beauchemin.jpg',
     );
     let view1 = new Marzipano.RectilinearView(
       { yaw: 0, pitch: 0, roll: 0, fov: Math.PI / 2 },
@@ -51,18 +50,18 @@ window.onload = function() {
       pinFirstLevel: true,
     });
   
-    // // Create swtich hotspot
-    // let imgHotspot = document.createElement('img');
-    // imgHotspot.src =
-    //   'https://raw.githubusercontent.com/google/marzipano/master/demos/sample-tour/img/play.png';
-    // imgHotspot.classList.add('hotspot');
-    // imgHotspot.addEventListener('click', function() {
-    //   scene1.switchTo();
-    // });
-    // let position = { yaw: Math.PI / 4, pitch: Math.PI / 8, roll: Math.PI / 4 };
-    // // Add hotstop to the first scene's container
-    // scene.hotspotContainer().createHotspot(imgHotspot, position);
+    // Create swtich hotspot
+    let imgHotspot = document.createElement('img');
+    imgHotspot.src =
+      'https://raw.githubusercontent.com/google/marzipano/master/demos/sample-tour/img/play.png';
+    imgHotspot.classList.add('hotspot');
+    imgHotspot.addEventListener('click', function() {
+      scene1.switchTo();
+    });
+    let position = { yaw: Math.PI / 4, pitch: Math.PI / 8, roll: Math.PI / 4 };
+    // Add hotstop to the first scene's container
+    scene.hotspotContainer().createHotspot(imgHotspot, position);
   
-    // // Show first scene by default
-    // scene.switchTo();
+    // Show first scene by default
+    scene.switchTo();
   };
