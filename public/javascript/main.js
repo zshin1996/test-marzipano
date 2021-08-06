@@ -1,3 +1,23 @@
+const EntranceData = [
+    {
+        id: 'entrance',
+        name: 'Entrance',
+        source: 'https://raw.githubusercontent.com/zshin1996/test-marzipano/master/assets/schadowplatz.jpg',
+        parent: 'Entrance',
+        hotspot: [
+            {
+                position: { yaw: 70* Math.PI / 180, pitch: -3 * Math.PI / 180 },
+                title: '',
+                description: '',
+                link: '#',
+                type: 'travel',
+                canMove: true,
+                moveTo: 'mainhall-1',
+            },
+        ]
+    }
+]
+
 const MainHallData = [
     {
         id: 'mainhall-1',
@@ -497,6 +517,16 @@ const AltaBoothData = [
                 canMove: true,
                 moveTo: 'alta-booth-6',
             },
+            {
+                position: { yaw: -45 * Math.PI / 180, pitch: 10 * Math.PI / 180 },
+                perspective: { radius: 1640, extraRotations: "rotateX(5deg)" },
+                title: "",
+                description: '',
+                link: '<iframe width="560" height="315" src="https://www.youtube.com/embed/2CeX1rgtiJM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+                type: 'media',
+                canMove: false,
+                moveTo: '',
+            }
         ]
     },
     {
@@ -523,6 +553,15 @@ const AltaBoothData = [
                 canMove: true,
                 moveTo: 'alta-booth-1',
             },
+            {
+                position: { yaw: 20 * Math.PI / 180, pitch: 10 * Math.PI / 180 },
+                title: "",
+                description: '',
+                link: '',
+                type: 'travel',
+                canMove: true,
+                moveTo: 'alta-booth-5',
+            }
         ]
     },
 ]
@@ -839,48 +878,13 @@ window.onload = async function () {
     };
     let viewer = new Marzipano.Viewer(panoElement, options);
 
+    allScenes = allScenes.concat(await GenerateScene(EntranceData, viewer, true, true));
     allScenes = allScenes.concat(await GenerateScene(MainHallData, viewer, true, true));
     allScenes = allScenes.concat(await GenerateScene(AltaBoothData, viewer, true, true));
     // allScenes = allScenes.concat(await GenerateScene(Booth1Data, viewer, true, true));
     // allScenes = allScenes.concat(await GenerateScene(Booth2Data, viewer, true, true));
-    // create quick scene.
-    // var quickScene = $('#quickScene');
-    // let flags = [], output = [], l = sources.length, i;
-    // for (i = 0; i < l; i++) {
-    //     if (flags[sources[i].parent]) continue;
-    //     flags[sources[i].parent] = true;
-    //     output.push(sources[i].parent);
-    // }
-
-    // output.forEach(parent => {
-    //     let parentId = parent.replace(/\s/g, "-").toLowerCase();
-    //     quickScene.append(
-    //         '<li class="mb-1">' +
-    //         '<button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse"' +
-    //         'data-bs-target="#' + parentId + '-collapse" aria-expanded="true">' +
-    //         parent +
-    //         '</button>' +
-    //         '<div class="collapse show" id="' + parentId + '-collapse" style="">' +
-    //         '<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">' +
-    //         '</ul>' +
-    //         '</div>' +
-    //         '</li>'
-    //     );
-    // });
-
-    // scenes.forEach(scene => {
-    //     let source = sources.find(source => source.source == scene.key);
-    //     let name = source.name;
-    //     let parentId = source.parent.replace(/\s/g, "-").toLowerCase() + '-collapse';
-    //     $('#' + parentId + ' ul').append(
-    //         '<li><a href="#" class="link-dark rounded" onclick="ChangeScene(' + scenes.indexOf(scene) + ')"> ' + name + ' </a></li>'
-    //     );
-
-    // });
 
     // Create swtich hotspot
-
-
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl)
@@ -889,7 +893,7 @@ window.onload = async function () {
 
     // Show first scene by default
     // ChangeScene(1);
-    ChangeScene(allScenes, 'mainhall-4');
+    ChangeScene(allScenes, 'entrance');
     // mainhall[0].value.scene.switchTo();
 };
 
@@ -964,9 +968,18 @@ const GenerateScene = function (data, viewer, generateHotspot, generateQuickTrav
                     i.classList.add('fa-info-circle');
                     span.append(i);
                 }
+                else if (hotspot.type === 'media') {
+                    imgHotspot = document.createElement('div');
+                    imgHotspot.setAttribute('id', 'iframespot');
+                    imgHotspot.innerHTML = hotspot.link;
+                }
 
-                if (imgHotspot != null)
-                    each.value.scene.hotspotContainer().createHotspot(imgHotspot, hotspot.position);
+                if (imgHotspot != null) {
+                    if ('perspective' in hotspot) 
+                        each.value.scene.hotspotContainer().createHotspot(imgHotspot, hotspot.position, hotspot.perspective);
+                    else
+                        each.value.scene.hotspotContainer().createHotspot(imgHotspot, hotspot.position);
+                }
             });
         });
     }
