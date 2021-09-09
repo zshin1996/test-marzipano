@@ -518,15 +518,15 @@ const AltaBoothData = [
                 moveTo: 'alta-booth-6',
             },
             {
-                position: { yaw: -45 * Math.PI / 180, pitch: 10 * Math.PI / 180 },
-                perspective: { radius: 1640, extraRotations: "rotateX(5deg)" },
+                position: { yaw: -35 * Math.PI / 180, pitch: 0 * Math.PI / 180 },
+                perspective: { perspective: { radius: 1200, extraTransforms: "rotateX(0deg)" }},
                 title: "",
                 description: '',
                 link: '<iframe width="560" height="315" src="https://www.youtube.com/embed/2CeX1rgtiJM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
                 type: 'media',
-                canMove: false,
+                canMove: true,
                 moveTo: '',
-            }
+            },
         ]
     },
     {
@@ -907,10 +907,12 @@ const GenerateScene = function (data, viewer, generateHotspot, generateQuickTrav
         Marzipano.RectilinearView.limit.pitch(-Math.PI / 2, Math.PI / 2),
     );
 
+    // var limiter = Marzipano.RectilinearView.limit.traditional(4096, 100*Math.PI/180);
+
     let levels = [{ size: 4096 / 4 }, { size: 2048 / 2 }];
     let geometry = new Marzipano.EquirectGeometry(levels);
     let view = new Marzipano.RectilinearView(
-        { yaw: 0, pitch: 0, roll: 0, fov: Math.PI / 2 },
+        null,
         limiter,
     );
 
@@ -975,7 +977,7 @@ const GenerateScene = function (data, viewer, generateHotspot, generateQuickTrav
                 }
 
                 if (imgHotspot != null) {
-                    if ('perspective' in hotspot) 
+                    if ('perspective' in hotspot)
                         each.value.scene.hotspotContainer().createHotspot(imgHotspot, hotspot.position, hotspot.perspective);
                     else
                         each.value.scene.hotspotContainer().createHotspot(imgHotspot, hotspot.position);
